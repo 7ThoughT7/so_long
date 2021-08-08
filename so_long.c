@@ -1,21 +1,21 @@
 #include "so_long.h"
 
-void	len_map(t_data *vars, char **argv)
+void	len_map(t_game *game, char **argv)
 {
 	int fd;
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
-	vars->len_map = 2;
+	game->param.len_map = 2;
 	while (get_next_line(fd, &line))
 	{
-		vars->len_map++;
+		game->param.len_map++;
 		free(line);
 	}
 	free(line);
 }
 
-void	read_maps(char **argv, t_data *vars)
+void	read_maps(char **argv, t_game *game)
 {
 	int		i;
 	int		fd;
@@ -24,111 +24,118 @@ void	read_maps(char **argv, t_data *vars)
 
 	i = 0;
 	gnl = 1;
-	len_map(vars, argv);
-	vars->map = (char **) malloc(sizeof(char *) * (vars->len_map  + 2));
+	len_map(game, argv);
+	game->param.map = (char **) malloc(sizeof(char *) * (game->param.len_map  + 2));
 	fd = open(argv[1], O_RDONLY);
 	while (gnl)
 	{
 		gnl = get_next_line(fd, &line);
-		vars->map[i++] = ft_strdup(line);
+		game->param.map[i++] = ft_strdup(line);
 		free(line);
 	}
-	vars->map[i] = NULL;
+	game->param.map[i] = NULL;
 //	free(line);
 }
 
-void	position(t_data *vars)
+void	position(t_game *game)
 {
 	int y;
 	int x;
 
 	y = 0;
-	vars->coins = 0;
-	while (vars->map[y])
+	game->param.coins_num = 0;
+	while (game->param.map[y])
 	{
 		x = 0;
-		while (vars->map[y][x])
+		while (game->param.map[y][x])
 		{
-			if (vars->map[y][x] == 'P')
+			if (game->param.map[y][x] == 'P')
 			{
-				vars->p_x = x;
-				vars->p_y = y;
+				game->param.p_x = x;
+				game->param.p_y = y;
 			}
-			if (vars->map[y][x] == 'C')
-				vars->coins++;
+			if (game->param.map[y][x] == 'C')
+				game->param.coins_num++;
 			x++;
 		}
 		y++;
 	}
-	vars->map_width = x * 50;
-	vars->map_height = y * 50;
+	game->param.map_width = x * 50;
+	game->param.map_height = y * 50;
 }
 
-void	image(t_data *vars)
+void	image(t_game *game)
 {
 	int	x;
 	int y;
 
 	x = 0;
 	y = 0;
-	vars->wall = mlx_xpm_file_to_image(vars->mlx,
+	game->pictures.wall = mlx_xpm_file_to_image(game->param.mlx,
 										"image/wall.xpm", &x, &y);
-	vars->player = mlx_xpm_file_to_image(vars->mlx,
+	game->pictures.player = mlx_xpm_file_to_image(game->param.mlx,
 										 "image/spider_0.xpm", &x, &y);
-	vars->coins = mlx_xpm_file_to_image(vars->mlx,
+	game->pictures.coins = mlx_xpm_file_to_image(game->param.mlx,
 										 "image/fly.xpm", &x, &y);
-	vars->web = mlx_xpm_file_to_image(vars->mlx,
+	game->pictures.web = mlx_xpm_file_to_image(game->param.mlx,
 										"image/aa.xpm", &x, &y);
-	vars->exit1 = mlx_xpm_file_to_image(vars->mlx,
+	game->pictures.exit1 = mlx_xpm_file_to_image(game->param.mlx,
 									  "image/exit2.xpm", &x, &y);
 }
 
-void	filling_map(t_data *vars)
+void	filling_map(t_game *game)
 {
 	int x;
 	int	y;
 
 	y = 0;
-	while (vars->map[y])
+	while (game->param.map[y])
 	{
 		x = 0;
-		while (vars->map[y][x])
+		while (game->param.map[y][x])
 		{
-			if (vars->map[y][x] == '1')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->wall, x
-				* 50, y * 50);
-			if (vars->map[y][x] == 'P')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->player, x
-				* 50, y * 50);
-			if (vars->map[y][x] == 'C')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->coins, x
-				* 50, y * 50);
-			if (vars->map[y][x] == '0')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->web, x *
-				50, y * 50);
-			if (vars->map[y][x] == 'E')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->exit1, x
-				* 50, y * 50);
+			if (game->param.map[y][x] == '1')
+				mlx_put_image_to_window(game->param.mlx, game->param.win,
+										game->pictures.wall,
+										x * 50, y * 50);
+			if (game->param.map[y][x] == 'P')
+				mlx_put_image_to_window(game->param.mlx, game->param.win,
+										game->pictures.player, x * 50, y * 50);
+			if (game->param.map[y][x] == 'C')
+				mlx_put_image_to_window(game->param.mlx, game->param.win,
+										game->pictures.coins, x * 50, y * 50);
+			if (game->param.map[y][x] == '0')
+				mlx_put_image_to_window(game->param.mlx, game->param.win,
+										game->pictures.web,
+										x * 50, y * 50);
+			if (game->param.map[y][x] == 'E')
+				mlx_put_image_to_window(game->param.mlx, game->param.win,
+										game->pictures.exit1, x * 50, y * 50);
 			x++;
 		}
 		y++;
 	}
 }
 
+//int	key_hook(int keycode, t_game *game)
+//{
+//	if (keycode )
+//}
+
 int	main(int argc, char **argv)
 {
-	t_data 	vars;
+	t_game	game;
 
 	if (argc != 2)
 		return (1);
-	read_maps(argv, &vars);
-	position(&vars);
+	read_maps(argv, &game);
+	position(&game);
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, vars.map_width, vars.map_height,
+	game.param.mlx = mlx_init();
+	game.param.win = mlx_new_window(game.param.mlx, game.param.map_width, game.param.map_height,
 							  "So_long!");
-	image(&vars);
-	filling_map(&vars);
-
-	mlx_loop(vars.mlx);
+	image(&game);
+	filling_map(&game);
+//	mlx_hook(game.param.mlx, 2, (1L << 0), key_hook, &game);
+	mlx_loop(game.param.mlx);
 }

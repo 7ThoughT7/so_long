@@ -7,9 +7,10 @@
 #include "GNL/get_next_line.h"
 
 
-typedef struct	s_data
+typedef struct	s_param
 {
 	int		len_map;
+	int 	coins_num;
 	char	**map;
 	void	*mlx;
 	void	*win;
@@ -17,12 +18,22 @@ typedef struct	s_data
 	int		p_y;
 	int 	map_height;
 	int 	map_width;
+}				t_param;
+
+typedef struct	s_pictures
+{
 	void	*wall;
 	void	*player;
 	void	*coins;
 	void	*web;
 	void	*exit1;
-}				t_data;
 
+}			t_pictures;
+
+typedef struct s_game
+{
+	t_param		param;
+	t_pictures	pictures;
+}				t_game;
 
 #endif
