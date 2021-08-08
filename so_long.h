@@ -11,6 +11,7 @@ typedef struct	s_param
 {
 	int		len_map;
 	int 	coins_num;
+	int		step;
 	char	**map;
 	void	*mlx;
 	void	*win;
