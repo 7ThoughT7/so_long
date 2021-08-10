@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include "GNL/get_next_line.h"
 
-
-typedef struct	s_param
+typedef struct	s_info
 {
 	int		len_map;
 	int 	coins_num;
@@ -19,7 +18,7 @@ typedef struct	s_param
 	int		p_y;
 	int 	map_height;
 	int 	map_width;
-}				t_param;
+}				t_info;
 
 typedef struct	s_pictures
 {
@@ -27,13 +26,13 @@ typedef struct	s_pictures
 	void	*player;
 	void	*coins;
 	void	*web;
-	void	*exit1;
+	void	*exit_0;
 
 }			t_pictures;
 
 typedef struct s_game
 {
-	t_param		param;
+	t_info		info;
 	t_pictures	pictures;
 }				t_game;
 
