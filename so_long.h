@@ -8,7 +8,8 @@
 
 typedef struct	s_info
 {
-	int		len_map;
+	int		str_num;
+	int		str_len;
 	int 	coins_num;
 	int		step;
 	char	**map;
@@ -35,5 +36,21 @@ typedef struct s_game
 	t_info		info;
 	t_pictures	pictures;
 }				t_game;
+
+char	*str_chr(const char *s, char c);
+void	str_num(t_game *game, char **argv);
+int 	str_len(t_game *game);
+void	exit_game(int i);
+void	error();
+
+void	read_maps(char **argv, t_game *game);
+void	position(t_game *game);
+void	image(t_game *game);
+void	filling_map(t_game *game);
+
+void	handling_0(t_game *game, int x, int y);
+void	button_handling(t_game *game, int x, int y);
+int		key_hook(int keycode, t_game *game);
+void	parser(t_game *game);
 
 #endif

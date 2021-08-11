@@ -1,7 +1,8 @@
 NAME	= so_long
 HEADER	= so_long.h
 
-LIST		= GNL/get_next_line.c GNL/get_next_line_utils.c so_long.c
+LIST		= GNL/get_next_line.c GNL/get_next_line_utils.c so_long.c secondary_functions.c map_initialization.c \
+				buttons.c parser.c
 
 OBJ			= $(LIST:.c=.o)
 
@@ -22,7 +23,7 @@ clean :
 			rm -f $(OBJ)
 
 fclean :	clean
-			rm -f $(NAME)
+			rm -f $(NAME) $(OBJ)
 
 re :		fclean all
 
