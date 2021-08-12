@@ -1,8 +1,8 @@
 NAME	= so_long
 HEADER	= so_long.h
 
-LIST		= GNL/get_next_line.c GNL/get_next_line_utils.c so_long.c secondary_functions.c map_initialization.c \
-				buttons.c parser.c
+LIST		= GNL/get_next_line.c GNL/get_next_line_utils.c so_long.c secondary_functions_0.c secondary_functions_1.c \
+				buttons.c parser.c map_initialization.c
 
 OBJ			= $(LIST:.c=.o)
 
