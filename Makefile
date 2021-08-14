@@ -14,9 +14,6 @@ FLAGS       = -Wall -Wextra -Werror
 $(NAME) :	$(OBJ) $(HEADER)
 			gcc $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-#bonus :		$(OBJ) $(OBJ_B) $(HEADER)
-#			gcc $(OBJ_B) -o $(NAME_B)
-
 all :		$(NAME)
 
 clean :

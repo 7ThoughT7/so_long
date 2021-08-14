@@ -5,7 +5,7 @@ static void	checking_walls(t_game *game)
 	int		y;
 	int		x;
 	char	*str;
-	int 	last_y;
+	int		last_y;
 	int		last_x;
 
 	y = 0;
@@ -31,7 +31,7 @@ static void	checking_walls(t_game *game)
 static void	check_str_len(t_game *game)
 {
 	int	y;
-	int x;
+	int	x;
 
 	y = 0;
 	while (game->info.map[y])
@@ -43,21 +43,27 @@ static void	check_str_len(t_game *game)
 			exit_game(1);
 		y++;
 	}
+	printf("%d\n%d\n", x, y);
+	if (x > 58 || y > 32)
+		exit_game(1);
 }
 
 void	file_extension_check(char **argv)
 {
-	int 	fd;
-	int		i;
+	int		fd;
 	char	*dot;
 	char	*ber;
 
 	ber = ".ber";
-	i = 0;
 	fd = open(argv[1], O_DIRECTORY);
 	if (fd != -1)
 		exit_game(1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		exit_game(1);
 	dot = ft_strchr(argv[1], '.');
+	if (dot[0] == '\0')
+		exit_game(1);
 	if (ft_strncmp(dot, ber, 4) != 0)
 		exit_game(1);
 }

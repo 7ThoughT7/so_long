@@ -1,16 +1,16 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "minilibX/mlx.h"
-#include <unistd.h>
-#include <stdio.h>
-#include "GNL/get_next_line.h"
+# include "minilibX/mlx.h"
+# include <unistd.h>
+# include <stdio.h>
+# include "GNL/get_next_line.h"
 
-typedef struct	s_info
+typedef struct s_info
 {
 	int		str_num;
 	int		str_len;
-	int 	coins_num;
+	int		coins_num;
 	int		step;
 	char	**map;
 	void	*mlx;
@@ -19,12 +19,12 @@ typedef struct	s_info
 	int		p_y;
 	int		P;
 	int		C;
-	int 	E;
-	int 	map_height;
-	int 	map_width;
-}				t_info;
+	int		E;
+	int		map_height;
+	int		map_width;
+}			t_info;
 
-typedef struct	s_pictures
+typedef struct s_pictures
 {
 	void	*wall;
 	void	*player;
@@ -47,11 +47,9 @@ typedef struct s_game
 
 char	*str_chr(const char *s, char c);
 void	str_num(t_game *game, char **argv);
-int 	str_len(t_game *game);
-void	exit_game(int i);
+int		str_len(t_game *game);
+int		exit_game(int i);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
-void	error();
 
 void	file_extension_check(char **argv);
 void	read_maps(char **argv, t_game *game);

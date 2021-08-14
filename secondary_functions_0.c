@@ -2,7 +2,7 @@
 
 void	str_num(t_game *game, char **argv)
 {
-	int fd;
+	int		fd;
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
@@ -47,7 +47,7 @@ char	*str_chr(const char *s, char c)
 	return (NULL);
 }
 
-void	exit_game(int i)
+int	exit_game(int i)
 {
 	if (i == 1)
 		printf("%s", "INVALID MAP");
@@ -56,6 +56,7 @@ void	exit_game(int i)
 	if (i == 3)
 		printf("%s", "GAME OVER");
 	exit(1);
+	return (0);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

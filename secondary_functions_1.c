@@ -62,7 +62,6 @@ void	print_step(t_game *game)
 	char	*str_1;
 	char	*str_0;
 
-
 	mlx_put_image_to_window(game->info.mlx, game->info.win, \
 	game->pictures.wall, 0 * 50, 0 * 50);
 	mlx_put_image_to_window(game->info.mlx, game->info.win, \
@@ -70,14 +69,15 @@ void	print_step(t_game *game)
 	str_0 = "Step: ";
 	str_1 = ft_itoa(game->info.step);
 	mlx_string_put(game->info.mlx, game->info.win, 12, 12, 0xFF000000,
-				   str_0);
+		str_0);
 	mlx_string_put(game->info.mlx, game->info.win, 62, 12, 0xFF000000,
-				   str_1);
+		str_1);
+	free(str_1);
 }
 
 void	open_door(t_game *game)
 {
-	int x;
+	int	x;
 	int	y;
 
 	y = 0;
